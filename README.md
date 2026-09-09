@@ -38,6 +38,164 @@ git clone https://github.com/emilianoneto/minio-api
 cd minio-api
 ```
 
+ ## Configuração
+
+ Crie o arquivo `.env` a partir do arquivo de exemplo:
+
+```
+cp .env.example .env
+```
+
+ Abra o arquivo `.env` e configure as informações do MinIO:
+
+```
+PORT=3000
+
+MINIO_ENDPOINT=http://localhost:9000
+MINIO_ACCESS_KEY=seu_usuario
+MINIO_SECRET_KEY=sua_senha
+
+MINIO_BUCKET=arquivos
+MINIO_REGION=us-east-1
+```
+
+ Substitua `seu_usuario` e `sua_senha` pelas credenciais configuradas no MinIO.
+
+ > O arquivo `.env` não deve ser enviado para o GitHub.
+
+ ## Instalação das dependências
+
+ Instale as dependências do projeto:
+
+```
+npm install
+```
+
+ ## Configuração do MinIO
+
+ O projeto utiliza o MinIO para armazenar os arquivos enviados pela API.
+
+ Inicie o MinIO utilizando o Docker Compose:
+
+```
+docker compose up -d
+```
+
+ Verifique se o MinIO está em execução:
+
+```
+docker compose ps
+```
+
+ O MinIO ficará disponível em:
+
+```
+http://localhost:9000
+```
+
+ O painel de administração ficará disponível em:
+
+```
+http://localhost:9001
+```
+
+ ### Criando o bucket
+
+ Acesse o painel do MinIO pelo navegador:
+
+```
+http://localhost:9001
+```
+
+ Utilize as credenciais configuradas no `docker-compose.yml`.
+
+ Depois:
+
+ 1. Acesse **Buckets**.
+2. Clique em **Create Bucket**.
+3. Informe o nome `arquivos`.
+4. Clique em **Create Bucket**.
+
+ O bucket `arquivos` será utilizado pela API para armazenar os arquivos.
+
+ ## Executando a API
+
+ Após configurar o `.env` e iniciar o MinIO, execute:
+
+```
+npm start
+```
+
+ A API estará disponível em:
+
+```
+http://localhost:3000
+```
+
+ ## Testando a API
+
+ Os testes podem ser realizados utilizando a extensão **REST Client** do VS Code.
+
+ Abra o arquivo:
+
+```
+tests/api.http
+```
+
+ Execute as requisições diretamente pelo VS Code.
+
+ ## Parando o MinIO
+
+ Para parar o MinIO:
+
+```
+docker compose down
+```
+
+ Para iniciar novamente:
+
+```
+docker compose up -d
+```API de Armazenamento de Objetos com Node.js e MinIO
+
+ Projeto desenvolvido para a disciplina de Análise e Desenvolvimento de Sistemas.
+
+ A aplicação implementa uma API REST em Node.js integrada ao MinIO, utilizando a API compatível com Amazon S3.
+
+ ## Tecnologias
+
+ - Node.js
+- Express
+- MinIO
+- Docker
+- Docker Compose
+- AWS SDK for JavaScript
+- Multer
+- REST Client
+
+ ## Requisitos
+
+ - Node.js
+- npm
+- Docker
+- Docker Compose
+- VS Code
+- Extensão REST Client
+
+ ## Instalação
+
+ Clone o projeto:
+
+```
+git clone https://github.com/emilianoneto/minio-api
+```
+
+ Acesse a pasta do projeto:
+
+```
+cd minio-api
+```
+
 ```
 cp .env.example .env
 ```
