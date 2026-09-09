@@ -1,0 +1,19 @@
+### Verificar API
+GET http://localhost:3000/
+
+### Listar todos os arquivos
+GET http://localhost:3000/files
+
+### Upload de arquivo
+POST http://localhost:3000/upload
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="teste.txt"
+Content-Type: text/plain
+
+< ./teste.txt
+--boundary--
+
+### Obter URL do arquivo
+GET http://localhost:3000/files/teste.txt
