@@ -38,6 +38,33 @@ git clone https://github.com/emilianoneto/minio-api
 cd minio-api
 ```
 
+```
+cp .env.example .env
+```
+
+ O arquivo deverá conter:
+
+```
+PORT=3000
+
+MINIO_ENDPOINT=http://localhost:9000
+MINIO_ACCESS_KEY=seu_usuario
+MINIO_SECRET_KEY=sua_senha
+
+MINIO_BUCKET=arquivos
+MINIO_REGION=us-east-1
+```
+
+ Altere `MINIO_ACCESS_KEY` e `MINIO_SECRET_KEY` para as credenciais utilizadas pelo seu MinIO.
+
+ O arquivo `.env` não deve ser enviado para o GitHub.
+
+ ## Executando a API
+
+ Depois de configurar o MinIO e o arquivo `.env`, execute:
+
+```
+
  Instale as dependências:
 
 ```
@@ -104,32 +131,7 @@ arquivos
 
  Na raiz do projeto, crie um arquivo chamado `.env`:
 
-```
-cp .env.example .env
-```
 
- O arquivo deverá conter:
-
-```
-PORT=3000
-
-MINIO_ENDPOINT=http://localhost:9000
-MINIO_ACCESS_KEY=seu_usuario
-MINIO_SECRET_KEY=sua_senha
-
-MINIO_BUCKET=arquivos
-MINIO_REGION=us-east-1
-```
-
- Altere `MINIO_ACCESS_KEY` e `MINIO_SECRET_KEY` para as credenciais utilizadas pelo seu MinIO.
-
- O arquivo `.env` não deve ser enviado para o GitHub.
-
- ## Executando a API
-
- Depois de configurar o MinIO e o arquivo `.env`, execute:
-
-```
 npm start
 ```
 
