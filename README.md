@@ -30,4 +30,4 @@ utilizando a API compatível com Amazon S3.
 Clone o projeto:
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/emilianoneto/minio-api
