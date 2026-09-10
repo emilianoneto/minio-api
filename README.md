@@ -1,8 +1,8 @@
-API de Armazenamento de Objetos com Node.js e MinIO
+# MinIO API
 
- Projeto desenvolvido para a disciplina de Análise e Desenvolvimento de Sistemas.
+ API de armazenamento de objetos desenvolvida em **Node.js**, integrada ao **MinIO** por meio de uma API compatível com Amazon S3.
 
- A aplicação implementa uma API REST em Node.js integrada ao MinIO, utilizando a API compatível com Amazon S3.
+ Projeto desenvolvido para a disciplina de **Análise e Desenvolvimento de Sistemas**.
 
  ## Tecnologias
 
@@ -17,19 +17,21 @@ API de Armazenamento de Objetos com Node.js e MinIO
 
  ## Requisitos
 
+ Antes de iniciar, certifique-se de ter instalado:
+
  - Node.js
 - npm
 - Docker
 - Docker Compose
-- VS Code
-- Extensão REST Client
+- Visual Studio Code
+- Extensão REST Client para o Visual Studio Code
 
- ## Instalação
+ ## 1\. Clonar o projeto
 
- Clone o projeto:
+ Clone o repositório:
 
 ```
-git clone https://github.com/emilianoneto/minio-api
+git clone https://github.com/emilianoneto/minio-api.git
 ```
 
  Acesse a pasta do projeto:
@@ -38,15 +40,23 @@ git clone https://github.com/emilianoneto/minio-api
 cd minio-api
 ```
 
- ## Configuração
+ ## 2\. Configuração do ambiente
 
- Crie o arquivo `.env` a partir do arquivo de exemplo:
+ O projeto possui um arquivo `.env-example` com as variáveis necessárias para configurar a aplicação.
+
+ Copie o arquivo para criar o `.env`:
 
 ```
-cp .env.example .env
+cp .env-example .env
 ```
 
- Abra o arquivo `.env` e configure as informações do MinIO:
+ Abra o arquivo `.env`:
+
+```
+nano .env
+```
+
+ Configure as variáveis:
 
 ```
 PORT=3000
@@ -59,261 +69,150 @@ MINIO_BUCKET=arquivos
 MINIO_REGION=us-east-1
 ```
 
- Substitua `seu_usuario` e `sua_senha` pelas credenciais configuradas no MinIO.
+ ### Variáveis de ambiente
 
- > O arquivo `.env` não deve ser enviado para o GitHub.
+ | Variável | Descrição |
+| --- | --- |
+| `PORT` | Porta utilizada pela API |
+| `MINIO_ENDPOINT` | Endereço do servidor MinIO |
+| `MINIO_ACCESS_KEY` | Usuário/chave de acesso do MinIO |
+| `MINIO_SECRET_KEY` | Senha/chave secreta do MinIO |
+| `MINIO_BUCKET` | Nome do bucket utilizado pela aplicação |
+| `MINIO_REGION` | Região utilizada pelo MinIO |
 
- ## Instalação das dependências
+ > **Importante:** substitua `seu_usuario` e `sua_senha` pelas credenciais configuradas no seu ambiente MinIO.
 
- Instale as dependências do projeto:
+ O arquivo `.env` contém informações de configuração e credenciais. **Não compartilhe ou envie esse arquivo para o GitHub.**
+ Caso o arquivo .env não seja configurado, o acesso padrão será:
 
 ```
-npm install
+Usuário: minioadmin
+Senha: minioadmin
 ```
 
- ## Configuração do MinIO
+ ## 3\. Iniciar o MinIO
 
- O projeto utiliza o MinIO para armazenar os arquivos enviados pela API.
-
- Inicie o MinIO utilizando o Docker Compose:
+ Com o Docker em execução, inicie o MinIO utilizando o Docker Compose:
 
 ```
 docker compose up -d
 ```
 
- Verifique se o MinIO está em execução:
+ Verifique se o container está em execução:
 
 ```
 docker compose ps
 ```
 
- O MinIO ficará disponível em:
+ O MinIO estará disponível em:
 
 ```
 http://localhost:9000
 ```
 
- O painel de administração ficará disponível em:
+ O painel de gerenciamento do MinIO estará disponível em:
 
 ```
 http://localhost:9001
 ```
 
- ### Criando o bucket
+ As credenciais utilizadas para acessar o painel são as mesmas configuradas no `docker-compose.yml`.
 
- Acesse o painel do MinIO pelo navegador:
-
-```
-http://localhost:9001
-```
-
- Utilize as credenciais configuradas no `docker-compose.yml`.
-
- Depois:
-
- 1. Acesse **Buckets**.
-2. Clique em **Create Bucket**.
-3. Informe o nome `arquivos`.
-4. Clique em **Create Bucket**.
-
- O bucket `arquivos` será utilizado pela API para armazenar os arquivos.
-
- ## Executando a API
-
- Após configurar o `.env` e iniciar o MinIO, execute:
-
-```
-npm start
-```
-
- A API estará disponível em:
-
-```
-http://localhost:3000
-```
-
- ## Testando a API
-
- Os testes podem ser realizados utilizando a extensão **REST Client** do VS Code.
-
- Abra o arquivo:
-
-```
-tests/api.http
-```
-
- Execute as requisições diretamente pelo VS Code.
-
- ## Parando o MinIO
-
- Para parar o MinIO:
-
-```
-docker compose down
-```
-
- Para iniciar novamente:
-
-```
-docker compose up -d
-```API de Armazenamento de Objetos com Node.js e MinIO
-
- Projeto desenvolvido para a disciplina de Análise e Desenvolvimento de Sistemas.
-
- A aplicação implementa uma API REST em Node.js integrada ao MinIO, utilizando a API compatível com Amazon S3.
-
- ## Tecnologias
-
- - Node.js
-- Express
-- MinIO
-- Docker
-- Docker Compose
-- AWS SDK for JavaScript
-- Multer
-- REST Client
-
- ## Requisitos
-
- - Node.js
-- npm
-- Docker
-- Docker Compose
-- VS Code
-- Extensão REST Client
-
- ## Instalação
-
- Clone o projeto:
-
-```
-git clone https://github.com/emilianoneto/minio-api
-```
-
- Acesse a pasta do projeto:
-
-```
-cd minio-api
-```
-
-```
-cp .env.example .env
-```
-
- O arquivo deverá conter:
-
-```
-PORT=3000
-
-MINIO_ENDPOINT=http://localhost:9000
-MINIO_ACCESS_KEY=seu_usuario
-MINIO_SECRET_KEY=sua_senha
-
-MINIO_BUCKET=arquivos
-MINIO_REGION=us-east-1
-```
-
- Altere `MINIO_ACCESS_KEY` e `MINIO_SECRET_KEY` para as credenciais utilizadas pelo seu MinIO.
-
- O arquivo `.env` não deve ser enviado para o GitHub.
-
- ## Executando a API
-
- Depois de configurar o MinIO e o arquivo `.env`, execute:
-
-```
-
- Instale as dependências:
-
-```
-npm install
-```
-
- ## Configuração do MinIO
-
- O projeto utiliza o MinIO para armazenar os arquivos enviados pela API.
-
- ### 1\. Inicie o MinIO
+ ## 4\. Instalar as dependências
 
  Na pasta do projeto, execute:
 
 ```
-docker compose up -d
+npm install
 ```
 
- Verifique se os containers estão funcionando:
+ Esse comando instala todas as dependências necessárias para executar a API.
+
+ ## 5\. Executar a aplicação
+
+ Após configurar o `.env`, iniciar o MinIO e instalar as dependências, execute:
 
 ```
-docker compose ps
-```
-
- O MinIO ficará disponível em:
-
-```
-http://localhost:9000
-```
-
- O painel de administração ficará disponível em:
-
-```
-http://localhost:9001
-```
-
- ### 2\. Acesse o painel do MinIO
-
- Abra no navegador:
-
-```
-http://localhost:9001
-```
-
- Utilize as credenciais configuradas no arquivo `docker-compose.yml`.
-
- ### 3\. Crie o bucket
-
- No painel do MinIO:
-
- 1. Acesse **Buckets**.
-2. Clique em **Create Bucket**.
-3. Informe o nome:
-
-```
-arquivos
-```
-
- 4. Clique em **Create Bucket**.
-
- Esse é o bucket utilizado pela API.
-
- ## Configuração da API
-
- Na raiz do projeto, crie um arquivo chamado `.env`:
-
-
 npm start
 ```
 
- A API estará disponível em:
+ A API será iniciada na porta configurada no `.env`.
+
+ Com a configuração padrão, a API estará disponível em:
 
 ```
 http://localhost:3000
 ```
 
- ## Testando a API
+ ### Criação automática do bucket
 
- Os testes das requisições podem ser realizados utilizando a extensão **REST Client** do VS Code.
+ Não é necessário criar o bucket manualmente.
 
- Abra o arquivo:
+ Ao executar:
 
 ```
-tests/api.http
+npm start
 ```
 
- Execute as requisições diretamente pelo VS Code.
+ a aplicação verifica se o bucket definido em:
+
+```
+MINIO_BUCKET=arquivos
+```
+
+ já existe no MinIO.
+
+ Caso o bucket não exista, ele será **criado automaticamente pela aplicação durante o processo de inicialização**.
+
+ ## 6\. Testando a API
+
+ Para realizar as solicitações à API, foi utilizada a extensão **REST Client** do Visual Studio Code.
+
+ O projeto possui uma pasta:
+
+```
+tests/
+```
+
+ Nessa pasta estão disponíveis arquivos de teste com as requisições da API.
+
+ ### Utilizando o REST Client
+
+ 1. Abra o projeto no Visual Studio Code.
+2. Instale a extensão **REST Client**, caso ainda não esteja instalada.
+3. Acesse a pasta `tests`.
+4. Abra o arquivo de requisições.
+5. Certifique-se de que o MinIO e a API estejam em execução.
+6. Clique em **Send Request** acima de cada requisição para executá-la.
+
+ As solicitações disponíveis na pasta de testes permitem verificar o funcionamento da API e suas operações de armazenamento de arquivos.
+
+ ## Estrutura do projeto
+
+```
+minio-api/
+├── src/
+│   ├── config/
+│   │   └── minio.js
+│   ├── routes/
+│   │   └── files.routes.js
+│   └── server.js
+│
+├── tests/
+│   ├── api.http
+│   └── teste.txt
+│
+├── .env-example
+├── .gitignore
+├── docker-compose.yml
+├── package.json
+├── package-lock.json
+└── README.md
+```
 
  ## Parando o MinIO
 
- Para parar os containers:
+ Para parar o container do MinIO:
 
 ```
 docker compose down
@@ -324,3 +223,18 @@ docker compose down
 ```
 docker compose up -d
 ```
+
+ ## Fluxo rápido
+
+ Para configurar o projeto do zero:
+
+```
+git clone https://github.com/emilianoneto/minio-api.git
+cd minio-api
+cp .env-example .env
+docker compose up -d
+npm install
+npm start
+```
+
+ Depois, abra o Visual Studio Code, acesse a pasta `tests` e utilize o **REST Client** para realizar as solicitações à API.
